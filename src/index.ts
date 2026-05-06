@@ -9,7 +9,7 @@ import logger from "./utils/logger.js";
 import morganMiddleware from "./utils/morganMIddleware.js";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || "production";
 
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use("/api/v1/geocoding", geocodingRouter);
 
 app.use("/api/v1/reverse-geocoding", reverseGeocoding);
 
-app.listen(Number(PORT), "0.0.0.0", () => {
+app.listen(PORT, () => {
 
     logger.info(`Server runnning in ${NODE_ENV} mode`);
 
