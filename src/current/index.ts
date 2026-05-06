@@ -1,12 +1,10 @@
 import express from "express";
 import type { Request, Response } from "express";
-import { getCurrentWeather } from "../openmeteo/index.ts";  
+import { getCurrentWeather } from "../openmeteo/index.js";
 
 const currentWeather = express.Router();
 
 currentWeather.get("/", async (req: Request, res: Response) => {
-
-    console.log("Received request for current weather with query parameters:", req.query);
     
     const { lat, lon } = req.query;
 

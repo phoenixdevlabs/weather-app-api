@@ -1,7 +1,7 @@
 import express from "express";
 import type { Request, Response } from "express";
 
-import { getGeocodingData } from "../openmeteo/index.ts";
+import { getGeocodingData } from "../openmeteo/index.js";
 
 const geocodingRouter = express.Router();
 

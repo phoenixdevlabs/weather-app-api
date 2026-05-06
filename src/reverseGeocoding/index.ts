@@ -1,7 +1,7 @@
 import express from "express";
 import type { Request, Response } from "express";
 
-import { reverseGeocoding } from "../openmeteo/index.ts";
+import { reverseGeocoding } from "../openmeteo/index.js";
 
 const reverseGeocodingRouter = express.Router();
 

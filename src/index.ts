@@ -1,16 +1,22 @@
 import express from "express";
 import "dotenv/config";
-import { authMiddleware } from "./authentication/index.ts";
-import currentWeather from "./current/index.ts";
-import geocodingRouter from "./geocoding/index.ts";
-import reverseGeocoding from "./reverseGeocoding/index.ts";
+import { authMiddleware } from "./authentication/index.js";
+import currentWeather from "./current/index.js";
+import geocodingRouter from "./geocoding/index.js";
+import reverseGeocoding from "./reverseGeocoding/index.js";
+
+import logger from "./utils/logger.js";
+import morganMiddleware from "./utils/morganMIddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const NODE_ENV = process.env.NODE_ENV || "production";
 
 app.use(express.json());
 
 app.use(authMiddleware);
+
+app.use(morganMiddleware);
 
 app.use("/api/v1/weather/current", currentWeather);
 
@@ -18,8 +24,13 @@ app.use("/api/v1/geocoding", geocodingRouter);
 
 app.use("/api/v1/reverse-geocoding", reverseGeocoding);
 
-app.listen(PORT, () => {
-    console.log(`Server http://localhost:${PORT} is running`);
+app.listen(Number(PORT), "0.0.0.0", () => {
+
+    logger.info(`Server runnning in ${NODE_ENV} mode`);
+
+    if (NODE_ENV === "development") {
+        logger.info(`Server started at http://localhost:${PORT}`);
+    }
 });
 
 export default app;

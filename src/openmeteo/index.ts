@@ -404,7 +404,5 @@ export const reverseGeocoding = async ({
 
     const results = await response.json();
 
-    console.log(url, results);
-
     return results;
 };
