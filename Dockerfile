@@ -29,7 +29,7 @@ COPY --from=builder /app/dist ./dist
 RUN npm install --only=production
 
 # A porta padrão do Back4app costuma ser 3000, mas o app deve usar a variável PORT
-#EXPOSE 3000
+EXPOSE 3000
 
 # Comando para iniciar a aplicação
 CMD ["node", "dist/index.js"]
