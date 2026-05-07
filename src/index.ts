@@ -4,9 +4,11 @@ import { authMiddleware } from "./authentication/index.js";
 import currentWeather from "./current/index.js";
 import geocodingRouter from "./geocoding/index.js";
 import reverseGeocoding from "./reverseGeocoding/index.js";
+import hourlyWeather from "./hourly/index.js";
 
 import logger from "./utils/logger.js";
 import morganMiddleware from "./utils/morganMIddleware.js";
+import healthRouter from "./health/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,11 +16,15 @@ const NODE_ENV = process.env.NODE_ENV || "production";
 
 app.use(express.json());
 
+app.use("/health", healthRouter);
+
 app.use(authMiddleware);
 
 app.use(morganMiddleware);
 
 app.use("/api/v1/weather/current", currentWeather);
+
+app.use("/api/v1/weather/hourly", hourlyWeather)
 
 app.use("/api/v1/geocoding", geocodingRouter);
 
