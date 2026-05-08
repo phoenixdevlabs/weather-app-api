@@ -9,10 +9,20 @@ import hourlyWeather from "./hourly/index.js";
 import logger from "./utils/logger.js";
 import morganMiddleware from "./utils/morganMIddleware.js";
 import healthRouter from "./health/index.js";
+import cors from "cors";
+
+const corsOptions = {
+    origin: ["http://localhost:8081"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+};
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || "production";
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
